@@ -203,18 +203,6 @@ export default function Steps() {
     }
   };
 
-  const goToStep = (step) => {
-    if (isProgrammaticScroll.current || step < 0 || step >= stepsList.length)
-      return;
-
-    isProgrammaticScroll.current = true;
-    setActiveStep(step);
-
-    setTimeout(() => {
-      isProgrammaticScroll.current = false;
-    }, 800);
-  };
-
   // Set up event listeners
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -228,10 +216,75 @@ export default function Steps() {
     };
   }, [activeStep]);
 
-  const handleNext = () =>
-    goToStep(Math.min(activeStep + 1, stepsList.length - 1));
-  const handlePrev = () => goToStep(Math.max(activeStep - 1, 0));
+  const goToStep = (step) => {
+    if (
+      isProgrammaticScroll.current ||
+      !sectionRef.current ||
+      step < 0 ||
+      step >= stepsList.length
+    )
+      return;
 
+    isProgrammaticScroll.current = true;
+    setActiveStep(step);
+
+    const vh = window.innerHeight;
+    const targetScroll = sectionRef.current.offsetTop + step * vh;
+
+    window.scrollTo({
+      top: targetScroll,
+      behavior: "smooth",
+    });
+
+    setTimeout(() => {
+      isProgrammaticScroll.current = false;
+    }, 800);
+  };
+  const handleNext = () => {
+    const nextStep = Math.min(activeStep + 1, stepsList.length - 1);
+
+    // If we're not at the end yet, just go to next step
+    if (nextStep !== activeStep) {
+      goToStep(nextStep);
+      return;
+    }
+
+    // If we're at the end, scroll to just below our section
+    if (sectionRef.current) {
+      isProgrammaticScroll.current = true;
+      const sectionBottom =
+        sectionRef.current.offsetTop + sectionRef.current.offsetHeight;
+      window.scrollTo({
+        top: sectionBottom,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        isProgrammaticScroll.current = false;
+      }, 800);
+    }
+  };
+
+  const handlePrev = () => {
+    const prevStep = Math.max(activeStep - 1, 0);
+
+    // If we're not at the beginning yet, just go to previous step
+    if (prevStep !== activeStep) {
+      goToStep(prevStep);
+      return;
+    }
+
+    // If we're at the beginning, scroll to just above our section
+    if (sectionRef.current) {
+      isProgrammaticScroll.current = true;
+      window.scrollTo({
+        top: sectionRef.current.offsetTop - window.innerHeight,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        isProgrammaticScroll.current = false;
+      }, 800);
+    }
+  };
   return (
     <section
       className={styles["steps"]}
