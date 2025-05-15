@@ -1,9 +1,10 @@
-@import "./fonts/stylesheet.css";
+@use "@/assets/css/fonts/stylesheet.css" as *;
+
 // 1-main components
-@import "./components/1-main/variables.scss";
-@import "./components/1-main/mixin.scss";
-@import "./components/1-main/nulifier.scss";
+@use "@/assets/css/components/1-main/mixin.scss" as *;
+@use "@/assets/css/components/1-main/variables.scss" as *;
+@use "@/assets/css/components/1-main/nulifier.scss" as *;
 // 2-layout components
-@import "./components/2-layout/slick-theme.scss";
-@import "./components/2-layout/slick.scss";
-@import "./components/2-layout/typography.scss";
+@use "@/assets/css/components/2-layout/slick-theme.scss" as *;
+@use "@/assets/css/components/2-layout/slick.scss" as *;
+@use "@/assets/css/components/2-layout/typography.scss" as *;

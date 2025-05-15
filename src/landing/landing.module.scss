@@ -2,7 +2,6 @@
 @use "@/assets/css/components/1-main/variables.scss" as *;
 .hero {
   position: relative;
-  overflow: hidden;
   &::before {
     position: absolute;
     top: 0;
@@ -625,7 +624,6 @@
   }
 }
 .features {
-  overflow: hidden;
   padding: 100px 0;
   &__inner {
     &-title {
@@ -801,7 +799,6 @@
   }
 }
 .services {
-  overflow: hidden;
   padding: 100px 0;
   &__inner {
     &-title {
@@ -1004,7 +1001,7 @@
 // 540px
 @include xsm-sm {
   .services {
-    padding: 30px 0;
+    padding: 30px 0 50px;
     &Item {
       padding: 24px 20px;
       border-radius: 20px;
@@ -1084,7 +1081,7 @@
   }
   &Item {
     background-color: var(--white);
-    padding: 50px 60px 60px 60px;
+    padding: 40px 60px 50px 60px;
     box-shadow: 110px 195px 90px rgba(35, 43, 77, 0.02),
       62px 110px 76px rgba(35, 43, 77, 0.07),
       27px 49px 56px rgba(35, 43, 77, 0.11),

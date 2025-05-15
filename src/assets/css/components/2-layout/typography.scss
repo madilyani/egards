@@ -1,3 +1,5 @@
+@use "@/assets/css/components/1-main/mixin.scss" as *;
+@use "@/assets/css/components/1-main/variables.scss" as *;
 html.lenis,
 html.lenis body {
   height: auto;
@@ -63,6 +65,9 @@ p {
   top: -74px;
 }
 .main {
+  &__wrapper {
+    overflow: hidden;
+  }
 }
 .button {
   display: inline-flex;

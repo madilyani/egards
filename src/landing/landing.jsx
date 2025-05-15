@@ -9,13 +9,15 @@ import Steps from "./components/steps";
 export default function Landing() {
   return (
     <>
-      <div className="anchor" id="home"></div>
-      <Hero />
-      <div className="anchor" id="about"></div>
-      <Info />
-      <Features />
-      <div className="anchor" id="services"></div>
-      <Services />
+      <div className="main__wrapper">
+        <div className="anchor" id="home"></div>
+        <Hero />
+        <div className="anchor" id="about"></div>
+        <Info />
+        <Features />
+        <div className="anchor" id="services"></div>
+        <Services />
+      </div>
       <Steps />
       <Benefits />
       <div className="anchor" id="contact"></div>

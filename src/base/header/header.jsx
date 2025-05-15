@@ -3,12 +3,29 @@ import logo from "@/assets/images/logo.svg";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import classNames from "classnames";
+import { globeIcon } from "../SVG";
+import en from "@/assets/images/icons/en.png";
+import nl from "@/assets/images/icons/nl.png";
+import de from "@/assets/images/icons/de.png";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [menu, setMenu] = useState(false);
   const location = useLocation();
   const [isSticky, setIsSticky] = useState(false);
+  const [activeLink, setActiveLink] = useState("home");
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const [selectedLang, setSelectedLang] = useState(null);
 
+  const languages = [
+    { code: "EN", icon: en, name: "English" },
+    { code: "NL", icon: nl, name: "Dutch" },
+    { code: "DE", icon: de, name: "German" },
+  ];
+  const handleLangSelect = (lang) => {
+    setSelectedLang(lang);
+    setShowLangMenu(false);
+  };
   useEffect(() => {
     if (menu) {
       document.body.classList.add("active");
@@ -39,24 +56,26 @@ export default function Header() {
       });
     };
   }, []);
+
   useEffect(() => {
-    const windowScroll = () => {
-      const links = document.querySelectorAll(".anchorLinks");
-
+    const handleScroll = () => {
       const sections = document.querySelectorAll(".anchor");
-      let index = sections.length;
+      const scrollPosition = window.scrollY + 100;
 
-      while (--index && window.scrollY + 100 < sections[index].offsetTop) {
-        return;
-      }
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionId = section.getAttribute("id");
 
-      links.forEach((link) => link.classList.remove("active"));
-      links[index]?.classList.add("active");
+        if (scrollPosition >= sectionTop) {
+          setActiveLink(sectionId);
+        }
+      });
     };
-    windowScroll();
-    window.addEventListener("scroll", windowScroll);
-    return () => window.removeEventListener("scroll", windowScroll);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <header
       className={classNames(
@@ -77,23 +96,125 @@ export default function Header() {
             <div className={styles["nav__inner"]}>
               <div className={styles["nav__inner-links"]}>
                 <li>
-                  <a href="#home" className="anchorLinks active">
+                  <a
+                    href="#home"
+                    className={classNames(
+                      "anchorLinks",
+                      activeLink === "home" && "active"
+                    )}
+                  >
                     Home
                   </a>
                 </li>
                 <li>
-                  <a href="#about" className="anchorLinks">
+                  <a
+                    href="#about"
+                    className={classNames(
+                      "anchorLinks",
+                      activeLink === "about" && "active"
+                    )}
+                  >
                     Over Ons
                   </a>
                 </li>
                 <li>
-                  <a href="#services" className="anchorLinks">
+                  <a
+                    href="#services"
+                    className={classNames(
+                      "anchorLinks",
+                      activeLink === "services" && "active"
+                    )}
+                  >
                     Diensten
                   </a>
                 </li>
               </div>
               <div className={styles["nav__inner-buttons"]}>
-                <a href="#contact" className="button primary anchorLinks">
+                <div className={styles["lang"]}>
+                  <button
+                    type="button"
+                    className={styles["lang__btn"]}
+                    onClick={() => setShowLangMenu(!showLangMenu)}
+                  >
+                    {selectedLang ? (
+                      <>
+                        <span>
+                          <img
+                            src={selectedLang.icon}
+                            alt={selectedLang.code}
+                          />
+                        </span>
+                        <p>{selectedLang.name}</p>
+                      </>
+                    ) : (
+                      <>
+                        <span>{globeIcon}</span>
+                        <p>Talen</p>
+                      </>
+                    )}
+                  </button>
+                  <AnimatePresence>
+                    {showLangMenu && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.5 }}
+                        className={styles["lang__menu"]}
+                      >
+                        {languages.map((lang) => (
+                          <div
+                            key={lang.code}
+                            className={styles["lang__item"]}
+                            onClick={() => handleLangSelect(lang)}
+                          >
+                            <b>{lang.code}</b>
+                            <span>
+                              <img src={lang.icon} alt={lang.code} />
+                            </span>
+                            <p>{lang.name}</p>
+                          </div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                {/* <div className={styles["lang"]}>
+                  <button type="button" className={styles["lang__btn"]}>
+                    <span>{globeIcon}</span>
+                    <p>Talen</p>
+                  </button>
+                  <div className={styles["lang__menu"]}>
+                    <div className={styles["lang__item"]}>
+                      <b>EN</b>
+                      <span>
+                        <img src={en} alt="" />
+                      </span>
+                      <p>English</p>
+                    </div>
+                    <div className={styles["lang__item"]}>
+                      <b>NL</b>
+                      <span>
+                        <img src={nl} alt="" />
+                      </span>
+                      <p>Dutch</p>
+                    </div>
+                    <div className={styles["lang__item"]}>
+                      <b>DE</b>
+                      <span>
+                        <img src={de} alt="" />
+                      </span>
+                      <p>German</p>
+                    </div>
+                  </div>
+                </div> */}
+                <a
+                  href="#contact"
+                  className={classNames(
+                    "button primary anchorLinks",
+                    activeLink === "contact" && "active"
+                  )}
+                >
                   Contact
                 </a>
               </div>
