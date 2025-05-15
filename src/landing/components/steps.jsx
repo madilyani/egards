@@ -285,6 +285,7 @@ export default function Steps() {
       }, 800);
     }
   };
+
   return (
     <section
       className={styles["steps"]}
