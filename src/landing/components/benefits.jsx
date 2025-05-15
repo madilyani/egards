@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "../landing.module.scss";
-import banner from "@/assets/images/benefits/banner.png";
+import banner from "@/assets/images/benefits/banner.webp";
 import shape from "@/assets/images/benefits/shape.svg";
 import blur from "@/assets/images/benefits/blur.svg";
 import classNames from "classnames";

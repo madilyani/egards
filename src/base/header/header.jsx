@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import classNames from "classnames";
 import { globeIcon } from "../SVG";
-import en from "@/assets/images/icons/en.png";
-import nl from "@/assets/images/icons/nl.png";
-import de from "@/assets/images/icons/de.png";
+import en from "@/assets/images/icons/en.webp";
+import nl from "@/assets/images/icons/nl.webp";
+import de from "@/assets/images/icons/de.webp";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
@@ -97,6 +97,7 @@ export default function Header() {
               <div className={styles["nav__inner-links"]}>
                 <li>
                   <a
+                    aria-label="Navigate Home"
                     href="#home"
                     className={classNames(
                       "anchorLinks",
@@ -108,6 +109,7 @@ export default function Header() {
                 </li>
                 <li>
                   <a
+                    aria-label="Over Ons"
                     href="#about"
                     className={classNames(
                       "anchorLinks",
@@ -119,6 +121,7 @@ export default function Header() {
                 </li>
                 <li>
                   <a
+                    aria-label="Diensten"
                     href="#services"
                     className={classNames(
                       "anchorLinks",
@@ -132,6 +135,7 @@ export default function Header() {
               <div className={styles["nav__inner-buttons"]}>
                 <div className={styles["lang"]}>
                   <button
+                    aria-label="Language"
                     type="button"
                     className={styles["lang__btn"]}
                     onClick={() => setShowLangMenu(!showLangMenu)}
@@ -209,6 +213,7 @@ export default function Header() {
                   </div>
                 </div> */}
                 <a
+                  aria-label="Contact"
                   href="#contact"
                   className={classNames(
                     "button primary anchorLinks",

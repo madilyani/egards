@@ -1,6 +1,6 @@
 import styles from "../landing.module.scss";
-import banner from "@/assets/images/hero.png";
-import {motion } from "framer-motion";
+import banner from "@/assets/images/hero.webp";
+import { motion } from "framer-motion";
 
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 10 },
@@ -36,10 +36,18 @@ export default function Hero() {
               {...fadeInUp(0.4)}
               className={styles["hero__inner-buttons"]}
             >
-              <button type="button" className="button primary">
+              <button
+                aria-label="Neem contact op"
+                type="button"
+                className="button primary"
+              >
                 Neem contact op
               </button>
-              <button type="button" className="button secondary">
+              <button
+                aria-label="Meer weten"
+                type="button"
+                className="button secondary"
+              >
                 Meer weten
               </button>
             </motion.div>
@@ -47,14 +55,16 @@ export default function Hero() {
           <div className={styles["heroBanner"]}>
             <img src={banner} alt="" />
           </div>
-          <div  className={styles["hero__inner-row"]}>
+          <div className={styles["hero__inner-row"]}>
             <motion.div {...fadeInUp(0.5)} className={styles["heroTag"]}>
               24/7 Bereikbaarheid en assistentie
             </motion.div>
             <motion.div {...fadeInUp(0.6)} className={styles["heroTag"]}>
               Besturing, aansturing en opvolging
             </motion.div>
-            <motion.div {...fadeInUp(0.7)} className={styles["heroTag"]}>Rapportage en inzicht</motion.div>
+            <motion.div {...fadeInUp(0.7)} className={styles["heroTag"]}>
+              Rapportage en inzicht
+            </motion.div>
           </div>
         </div>
       </div>

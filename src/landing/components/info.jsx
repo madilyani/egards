@@ -1,9 +1,8 @@
 import styles from "../landing.module.scss";
-import image1 from "@/assets/images/info/1.png";
-import image2 from "@/assets/images/info/2.png";
+import image1 from "@/assets/images/info/1.webp";
+import image2 from "@/assets/images/info/2.webp";
 import classNames from "classnames";
 import { useState } from "react";
-import FadeIn from "../../base/FadeIn";
 import { AnimatePresence, motion } from "framer-motion";
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -111,7 +110,11 @@ export default function Info() {
               <span></span>
               <span></span>
             </div>
-            <button type="button" className="button uniq">
+            <button
+              aria-label="Neem contact op"
+              type="button"
+              className="button uniq"
+            >
               Neem contact op
             </button>
           </div>

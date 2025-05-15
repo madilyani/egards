@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "../landing.module.scss";
-import icon1 from "@/assets/images/steps/1.png";
-import icon2 from "@/assets/images/steps/2.png";
-import icon3 from "@/assets/images/steps/3.png";
-import icon4 from "@/assets/images/steps/4.png";
-import icon5 from "@/assets/images/steps/5.png";
-import icon6 from "@/assets/images/steps/6.png";
+import icon1 from "@/assets/images/steps/1.webp";
+import icon2 from "@/assets/images/steps/2.webp";
+import icon3 from "@/assets/images/steps/3.webp";
+import icon4 from "@/assets/images/steps/4.webp";
+import icon5 from "@/assets/images/steps/5.webp";
+import icon6 from "@/assets/images/steps/6.webp";
 import logo from "@/assets/images/logomark.svg";
 import { chevronLeft, chevronRight } from "../../base/SVG";
 import { motion, AnimatePresence } from "framer-motion";
@@ -327,6 +327,7 @@ export default function Steps() {
                 </h4>
                 <div className={styles["stepsInfo__buttons"]}>
                   <button
+                    aria-label="Next"
                     onClick={handlePrev}
                     disabled={activeStep === 0}
                     className={activeStep === 0 ? styles["disabled"] : ""}
@@ -334,6 +335,7 @@ export default function Steps() {
                     {chevronLeft}
                   </button>
                   <button
+                    aria-label="Preivous"
                     onClick={handleNext}
                     disabled={activeStep === stepsList.length - 1}
                     className={

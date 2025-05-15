@@ -1,8 +1,8 @@
 import styles from "../landing.module.scss";
-import banner from "@/assets/images/features/banner.png";
-import icon1 from "@/assets/images/features/1.png";
-import icon2 from "@/assets/images/features/2.png";
-import icon3 from "@/assets/images/features/3.png";
+import banner from "@/assets/images/features/banner.webp";
+import icon1 from "@/assets/images/features/1.webp";
+import icon2 from "@/assets/images/features/2.webp";
+import icon3 from "@/assets/images/features/3.webp";
 import { motion } from "framer-motion";
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 10 },
