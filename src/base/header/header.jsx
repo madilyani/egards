@@ -86,7 +86,11 @@ export default function Header() {
     >
       <div className="auto__container">
         <div className={styles["header__inner"]}>
-          <Link href="/" className={styles["header__inner-logo"]}>
+          <Link
+            href="/"
+            className={styles["header__inner-logo"]}
+            data-discover="true"
+          >
             <img src={logo} alt="" />
           </Link>
           <nav
@@ -94,7 +98,7 @@ export default function Header() {
             onClick={close}
           >
             <div className={styles["nav__inner"]}>
-              <div className={styles["nav__inner-links"]}>
+              <ul className={styles["nav__inner-links"]}>
                 <li>
                   <a
                     aria-label="Navigate Home"
@@ -131,7 +135,7 @@ export default function Header() {
                     Diensten
                   </a>
                 </li>
-              </div>
+              </ul>
               <div className={styles["nav__inner-buttons"]}>
                 <div className={styles["lang"]}>
                   <button
