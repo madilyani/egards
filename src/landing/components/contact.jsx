@@ -34,11 +34,11 @@ export default function Contact() {
                     <p>info@egards.nl</p>
                   </div>
                 </motion.a>
-                <motion.a {...fadeInUp(0.4)}  href="tel:+31 6 123 456 78" className={styles["contactItem"]}>
+                <motion.a {...fadeInUp(0.4)}  href="tel:+31 85 0832100" className={styles["contactItem"]}>
                   <div className={styles["contactItem__icon"]}>{mailIcon}</div>
                   <div className={styles["contactItem__info"]}>
                     <h6>Telefoon nr.</h6>
-                    <p>+31 6 123 456 78</p>
+                    <p>+31 85 0832100</p>
                   </div>
                 </motion.a>
                 <motion.a {...fadeInUp(0.5)}  href="https://maps.app.goo.gl/G3tFqmxy5nd4K2v1A" target="_blank" className={styles["contactItem"]}>
