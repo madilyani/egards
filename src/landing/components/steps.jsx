@@ -18,6 +18,7 @@ const fadeInUp = (delay = 0) => ({
     transition: { type: "spring", stiffness: 100, damping: 20, delay },
   },
 });
+
 const stepsList = [
   {
     id: "1",
@@ -44,7 +45,6 @@ const stepsList = [
     title: "2. Offerte op maat",
     text: "Op basis van de besproken behoeften, wensen en veelvoorkomende vragen op uw faciliteit, stellen wij een offerte op maat op. Hierin kunnen het huidige parkeersysteem, het volume en de gewenste dienstverlening van invloed zijn op de totstandkoming van de juiste prijs.",
   },
-
   {
     id: "3",
     icon: icon3,
@@ -91,207 +91,32 @@ const stepsList = [
     text: "Onze medewerkers houden de parkeervoorzieningen continu in realtime in de gaten, lossen problemen direct op en zorgen voor een soepele ervaring voor uw klanten.",
   },
 ];
+
 export default function Steps() {
   const [activeStep, setActiveStep] = useState(0);
   const sectionRef = useRef(null);
-  const isProgrammaticScroll = useRef(false);
-  const touchStartY = useRef(0);
-  const scrollDirection = useRef(null);
-  const lastScrollTime = useRef(0);
-  const scrollProgress = useRef(0);
-
-  // Scroll to step when activeStep changes
-  useEffect(() => {
-    if (isProgrammaticScroll.current || !sectionRef.current) return;
-
-    const vh = window.innerHeight;
-    const targetScroll = sectionRef.current.offsetTop + activeStep * vh;
-    const currentScroll = window.scrollY;
-
-    // Only scroll if we're not already at the target
-    if (Math.abs(targetScroll - currentScroll) > vh * 0.1) {
-      isProgrammaticScroll.current = true;
-      window.scrollTo({
-        top: targetScroll,
-        behavior: "smooth",
-      });
-
-      setTimeout(() => {
-        isProgrammaticScroll.current = false;
-      }, 800);
-    }
-  }, [activeStep]);
-
-  // Improved scroll handler with momentum detection
-  const handleScroll = () => {
-    if (isProgrammaticScroll.current || !sectionRef.current) return;
-
-    const now = Date.now();
-    const timeDiff = now - lastScrollTime.current;
-    lastScrollTime.current = now;
-
-    const section = sectionRef.current;
-    const scrollPosition = window.scrollY;
-    const sectionTop = section.offsetTop;
-    const vh = window.innerHeight;
-
-    // Calculate raw progress (0 to steps.length)
-    const rawProgress = (scrollPosition - sectionTop) / vh;
-    scrollProgress.current = rawProgress;
-
-    // Detect scroll direction
-    const newDirection = rawProgress > scrollProgress.current ? "down" : "up";
-    if (newDirection !== scrollDirection.current) {
-      scrollDirection.current = newDirection;
-    }
-
-    // Calculate step with smooth progression
-    let step;
-    const progressInStep = rawProgress % 1;
-
-    if (timeDiff < 50) {
-      // Fast scroll
-      step = Math.round(rawProgress);
-    } else {
-      // Slow scroll
-      if (scrollDirection.current === "down") {
-        step =
-          progressInStep > 0.15
-            ? Math.ceil(rawProgress)
-            : Math.floor(rawProgress);
-      } else {
-        step =
-          progressInStep < 0.85
-            ? Math.floor(rawProgress)
-            : Math.ceil(rawProgress);
-      }
-    }
-
-    // Clamp step to valid range
-    step = Math.max(0, Math.min(step, stepsList.length - 1));
-
-    if (step !== activeStep) {
-      setActiveStep(step);
-    }
-  };
-
-  // Touch handling with momentum
-  const handleTouchStart = (e) => {
-    touchStartY.current = e.touches[0].clientY;
-    scrollDirection.current = null;
-  };
-
-  const handleTouchMove = (e) => {
-    if (isProgrammaticScroll.current) return;
-
-    const touchY = e.touches[0].clientY;
-    const diff = touchStartY.current - touchY;
-
-    if (Math.abs(diff) < window.innerHeight * 0.1) return;
-
-    const direction = Math.sign(diff);
-    const newStep = activeStep + direction;
-
-    if (newStep >= 0 && newStep < stepsList.length) {
-      e.preventDefault();
-      isProgrammaticScroll.current = true;
-      setActiveStep(newStep);
-
-      setTimeout(() => {
-        isProgrammaticScroll.current = false;
-      }, 800);
-    }
-  };
-
-  // Set up event listeners
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-    };
-  }, [activeStep]);
 
   const goToStep = (step) => {
-    if (
-      isProgrammaticScroll.current ||
-      !sectionRef.current ||
-      step < 0 ||
-      step >= stepsList.length
-    )
-      return;
-
-    isProgrammaticScroll.current = true;
+    if (step < 0 || step >= stepsList.length) return;
     setActiveStep(step);
-
-    const vh = window.innerHeight;
-    const targetScroll = sectionRef.current.offsetTop + step * vh;
-
-    window.scrollTo({
-      top: targetScroll,
-      behavior: "smooth",
-    });
-
-    setTimeout(() => {
-      isProgrammaticScroll.current = false;
-    }, 800);
   };
+
   const handleNext = () => {
     const nextStep = Math.min(activeStep + 1, stepsList.length - 1);
-
-    // If we're not at the end yet, just go to next step
     if (nextStep !== activeStep) {
       goToStep(nextStep);
-      return;
-    }
-
-    // If we're at the end, scroll to just below our section
-    if (sectionRef.current) {
-      isProgrammaticScroll.current = true;
-      const sectionBottom =
-        sectionRef.current.offsetTop + sectionRef.current.offsetHeight;
-      window.scrollTo({
-        top: sectionBottom,
-        behavior: "smooth",
-      });
-      setTimeout(() => {
-        isProgrammaticScroll.current = false;
-      }, 800);
     }
   };
 
   const handlePrev = () => {
     const prevStep = Math.max(activeStep - 1, 0);
-
-    // If we're not at the beginning yet, just go to previous step
     if (prevStep !== activeStep) {
       goToStep(prevStep);
-      return;
-    }
-
-    // If we're at the beginning, scroll to just above our section
-    if (sectionRef.current) {
-      isProgrammaticScroll.current = true;
-      window.scrollTo({
-        top: sectionRef.current.offsetTop - window.innerHeight,
-        behavior: "smooth",
-      });
-      setTimeout(() => {
-        isProgrammaticScroll.current = false;
-      }, 800);
     }
   };
 
   return (
-    <section
-      className={styles["steps"]}
-      ref={sectionRef}
-      style={{ height: `${(stepsList.length + 1) * 100}vh` }}
-    >
+    <section className={styles["steps"]} ref={sectionRef}>
       <div className={styles["steps__sticky"]}>
         <div className="auto__container">
           <div className={styles["steps__inner"]}>
@@ -328,7 +153,7 @@ export default function Steps() {
                 </h4>
                 <div className={styles["stepsInfo__buttons"]}>
                   <button
-                    aria-label="Next"
+                    aria-label="Previous"
                     onClick={handlePrev}
                     disabled={activeStep === 0}
                     className={activeStep === 0 ? styles["disabled"] : ""}
@@ -336,7 +161,7 @@ export default function Steps() {
                     {chevronLeft}
                   </button>
                   <button
-                    aria-label="Preivous"
+                    aria-label="Next"
                     onClick={handleNext}
                     disabled={activeStep === stepsList.length - 1}
                     className={
@@ -367,6 +192,7 @@ export default function Steps() {
     </section>
   );
 }
+
 const StepsItem = (props) => {
   return (
     <div className={styles["stepsItem"]}>
@@ -378,6 +204,7 @@ const StepsItem = (props) => {
     </div>
   );
 };
+
 const ProgressBar = ({ progress, activeStep }) => {
   const pathRef = useRef(null);
   const [pathLength, setPathLength] = useState(0);
@@ -438,7 +265,7 @@ const ProgressBar = ({ progress, activeStep }) => {
 
       {/* Step numbers */}
       {stepPoints.map((point, index) => {
-        const isActive = index <= activeStep; // Changed to < instead of <=
+        const isActive = index <= activeStep;
         return (
           <g
             key={index}

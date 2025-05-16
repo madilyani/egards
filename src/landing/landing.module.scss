@@ -1012,26 +1012,7 @@
 .steps {
   position: relative;
   width: 100%;
-
-  &__sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  :global {
-    .auto__container {
-      width: 100%;
-      position: sticky;
-      top: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
+  padding: 150px 0;
   &__inner {
     background: linear-gradient(
       281.21deg,
@@ -1272,12 +1253,6 @@
 // 1024px
 @include lg-xlg {
   .steps {
-    :global {
-      .auto__container {
-        padding-top: 100px;
-        display: block;
-      }
-    }
     &__inner {
       flex-direction: column;
       padding: 40px;
