@@ -100,13 +100,14 @@ export default function Benefits() {
               praktijk van uw parkeerlocatie kan ondersteunen? Neem vandaag nog
               contact met ons op!
             </motion.h5>
-            <motion.button
+            <motion.a
+                href="#contact"
               {...fadeInUp(0.8)}
               type="button"
               className="button primary"
             >
               Neem contact op
-            </motion.button>
+            </motion.a>
           </div>
         </div>
       </div>

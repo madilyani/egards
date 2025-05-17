@@ -36,20 +36,22 @@ export default function Hero() {
               {...fadeInUp(0.4)}
               className={styles["hero__inner-buttons"]}
             >
-              <button
+              <a
+                href="#contact"
                 aria-label="Neem contact op"
                 type="button"
                 className="button primary"
               >
                 Neem contact op
-              </button>
-              <button
+              </a>
+              <a
                 aria-label="Meer weten"
+                href="#contact"
                 type="button"
                 className="button secondary"
               >
                 Meer weten
-              </button>
+              </a>
             </motion.div>
           </div>
           <div className={styles["heroBanner"]}>

@@ -110,13 +110,14 @@ export default function Info() {
               <span></span>
               <span></span>
             </div>
-            <button
+            <a
+              href="#contact"
               aria-label="Neem contact op"
               type="button"
               className="button uniq"
             >
               Neem contact op
-            </button>
+            </a>
           </div>
         </div>
       </div>
