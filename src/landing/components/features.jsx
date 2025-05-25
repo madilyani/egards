@@ -30,13 +30,13 @@ const featuresList = [
     id: "2",
     icon: icon2,
     title: "Beheerders",
-    text: "Een parkeersysteem leveren is één ding, maar 24/7 ondersteuning blijft een uitdaging. Dankzij onze diepgaande kennis van parkeersystemen kunnen storingen snel en accuraat worden opgelost. Dit draagt bij aan een sterke reputatie als betrouwbare leverancier en verhoogt de klanttevredenheid.",
+    text: "Beheert u een parkeerfaciliteit? Dan wilt u een professionele afhandeling van intercom- en telefoonoproepen, correcte aansturing van de technische dienst, huismeesters en beveiligers, en begeleiding van parkeerders waar nodig. Zo kunt u zich richten op het optimaliseren van de parkeerervaring voor de eindgebruiker.",
   },
   {
     id: "3",
     icon: icon3,
-    title: "Leveranciers van parkeersystemen",
-    text: "Beheert u een parkeerfaciliteit? Dan wilt u een professionele afhandeling van intercom- en telefoonoproepen, correcte aansturing van de technische dienst, huismeesters en beveiligers, en begeleiding van parkeerders waar nodig. Zo kunt u zich richten op het optimaliseren van de parkeerervaring voor de eindgebruiker.",
+    title: "Leveranciers van parkeersystemen en - applicaties",
+    text: "Een parkeersysteem leveren is één ding, maar 24/7 ondersteuning blijft een uitdaging. Dankzij onze diepgaande kennis van parkeersystemen kunnen storingen snel en accuraat worden opgelost. Dit draagt bij aan een sterke reputatie als betrouwbare leverancier en verhoogt de klanttevredenheid.",
   },
 ];
 export default function Features() {

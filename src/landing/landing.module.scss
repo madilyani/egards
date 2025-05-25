@@ -897,6 +897,17 @@
     p {
       opacity: 0.8;
     }
+    ul {
+      padding-left: 20px;
+      li {
+        opacity: 0.8;
+        list-style: disc;
+        margin-bottom: 4px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 }
 // 1380px

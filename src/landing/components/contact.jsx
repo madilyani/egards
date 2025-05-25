@@ -103,8 +103,8 @@ export default function Contact() {
                   <div className={styles["contactForm__tick"]}>{tickIcon}</div>
                   <motion.h3 {...fadeInUp(0.1)}>Thanks </motion.h3>
                   <motion.p {...fadeInUp(0.2)}>
-                    Thank you for submitting your details. We will answer
-                    shortly in 3 business days.
+                    Bedankt voor het invullen van het contactformulier. We
+                    zullen uw bericht zo spoedig mogelijk te beantwoorden.
                   </motion.p>
                 </div>
               </div>
@@ -119,9 +119,10 @@ export default function Contact() {
                   >
                     {crossIcon}
                   </div>
-                  <motion.h3 {...fadeInUp(0.1)}>Error </motion.h3>
+                  <motion.h3 {...fadeInUp(0.1)}>Oeps! </motion.h3>
                   <motion.p {...fadeInUp(0.2)}>
-                    Some Error accured please try again later.
+                    Er ging iets mis. Probeer het nog eens of neem contact met
+                    ons op.
                   </motion.p>
                 </div>
               </div>

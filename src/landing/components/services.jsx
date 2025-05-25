@@ -19,32 +19,52 @@ const servicesList = [
     id: "1",
     icon: icon1,
     title: "24/7 Assistentie & Communicatie",
-    text: "Directe afhandeling van intercom- en telefoongesprekken Proactieve ondersteuning en begeleiding van parkeerders Deskundige medewerkers met parkeervakexpertise",
+    list: [
+      "Directe afhandeling van intercom- en telefoongesprekken",
+      "Proactieve ondersteuning en begeleiding van parkeerders",
+      "Deskundige medewerkers met parkeervakexpertise",
+    ],
   },
   {
     id: "2",
     icon: icon2,
     title: "Operationele Controle & Systeembeheer",
-    text: "Controle en aansturing van in- en uitritten Resetten van betaalautomaten Beoordelen en oplossen van anti-passback situaties",
+    list: [
+      "Controle en aansturing van in- en uitritten",
+      "Resetten van betaalautomaten",
+      "Beoordelen en oplossen van anti-passback situaties",
+    ],
   },
 
   {
     id: "3",
     icon: icon3,
     title: "Monitoren & Rapportage",
-    text: "Monitoren van transactielogs, foutmeldingen en toegangslogs Incident- en storingsrapportages om patronen te signaleren Directe actie op urgente problemen",
+    list: [
+      "Monitoren van transactielogs, foutmeldingen en toegangslogs",
+      "Incident- en storingsrapportages om patronen te signaleren",
+      "Directe actie op urgente problemen",
+    ],
   },
   {
     id: "4",
     icon: icon4,
     title: "Communicatie & Coördinatie bij Storingen",
-    text: "Aansturing van technische dienst voor reparaties Informeren van parkinghosts en beheerders Doorgeven van urgente meldingen aan beveiligers",
+    list: [
+      "Aansturing van technische dienst voor reparaties",
+      "Informeren van parkinghosts en beheerders",
+      "Doorgeven van urgente meldingen aan beveiligers",
+    ],
   },
   {
     id: "5",
     icon: icon5,
     title: "Service & Klantgerichtheid",
-    text: "Op maat gemaakte protocollen afgestemd op uw locatie Rapportage op basis van de gewenste frequentie (dagelijks/wekelijks/maandelijks) Transparante kostenstructuur ",
+    list: [
+      "Op maat gemaakte protocollen afgestemd op uw locatie",
+      "Rapportage op basis van de gewenste frequentie (dagelijks/wekelijks/maandelijks)",
+      "Transparante kostenstructuur",
+    ],
   },
 ];
 export default function Services() {
@@ -80,7 +100,11 @@ const ServicesItem = (props) => {
         <img src={props.icon} alt="" />
       </div>
       <h5>{props.title}</h5>
-      <p>{props.text}</p>
+      <ul>
+        {props.list.map((item, index) => {
+          return <li key={index}>{item}</li>;
+        })}
+      </ul>
     </div>
   );
 };

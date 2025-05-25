@@ -29,7 +29,7 @@ const scaleX = (delay = 0) => ({
 const infoList = [
   {
     id: "1",
-    question: "Wat is Parking Assistance?",
+    question: "Voor wie is Parking Assistance?",
     answer: (
       <>
         Het ondersteunen van parkeerders op afstand. Wanneer parkeerders
