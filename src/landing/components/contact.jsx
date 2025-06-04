@@ -3,6 +3,7 @@ import { crossIcon, locationIcon, mailIcon, tickIcon } from "../../base/SVG";
 import styles from "../landing.module.scss";
 import { motion } from "framer-motion";
 import classNames from "classnames";
+import ReCAPTCHA from "react-google-recaptcha";
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 10 },
   whileInView: {
@@ -13,6 +14,12 @@ const fadeInUp = (delay = 0) => ({
 });
 export default function Contact() {
   const [submited, setSubmited] = useState(null);
+  const [verified, setVerified] = useState(false);
+
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setVerified(true);
+  }
   const onSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -196,9 +203,14 @@ export default function Contact() {
                     </div>
                   </motion.div>
                 </div>
+                <ReCAPTCHA
+                  sitekey="6LfXcUkrAAAAAFECTGXDvi4OUrZKxB-cq-i7wzr1"
+                  onChange={onChange}
+                />
                 <div className={styles["contactForm__foot"]}>
                   <motion.button
                     {...fadeInUp(0.5)}
+                    disabled={!verified}
                     type="submit"
                     className="button primary"
                   >
